@@ -20,9 +20,14 @@
   <?php require('config/db.php');
   $mysqli = new mysqli($servername, $username, $password, $dbname);
 
-  $qry = mysqli_query($mysqli, "SELECT Id,Name,Quote,Picture,Category,Lang FROM quotes WHERE Id LIKE '1'");
+  $i = 0;
+
+  while ($i<10) {
+
+  $qry = mysqli_query($mysqli, "SELECT Id,Name,Quote,Picture,Category,Lang FROM quotes WHERE 'Id' = ".$i."");
 
   while($rows = mysqli_fetch_array($qry)){
+
   $id = $rows['Id'];
   $quote = $rows['Quote'];
   $name = $rows['Name'];
@@ -30,14 +35,23 @@
   $category = $rows['Category'];
   $lang = $rows['Lang'];
 
+
+
   echo "<div class='Quote'>";
   echo "<div class='Quoteinner'>";
   echo "<img src='${picture}' class='Quoteinnerimg'>";
   echo "<p id='textfix'>${quote}</p>";
   echo "<p id='namefix'>${name}</p>";
+  echo "<p id='CatLand'>,ID:${id}</p>";
   echo "<p id='CatLand'>${category}, {$lang}</p>";
   echo "</div></div>";
-  }?>
+  $i++;
+
+  }
+  }
+
+
+  ?>
 
 
 
@@ -51,10 +65,12 @@
   <?php require('config/db.php');
   $mysqli = new mysqli($servername, $username, $password, $dbname);
 
-$i = 0;
-while ($i < 10) {
-  $qry = mysqli_query($mysqli, "SELECT Id,Name,Quote,Picture,Category,Lang FROM quotes WHERE 'Id' = ".$i."");
 
+
+for ($i=0; $i < 10; $i++) {
+  //Hämtar grejer från "quotes"
+  $qry = mysqli_query($mysqli, "SELECT Id,Name,Quote,Picture,Category,Lang FROM quotes WHERE 'Id' = ".$i."");
+//lägger in id, citat etc i en array.
   while($rows = mysqli_fetch_array($qry)){
 
   $id = $rows['Id'];
@@ -63,18 +79,18 @@ while ($i < 10) {
   $picture = $rows['Picture'];
   $category = $rows['Category'];
   $lang = $rows['Lang'];
-
+//skriver ut datan i rätt format.
   echo "<div class='Quote'>";
   echo "<div class='Quoteinner'>";
   echo "<img src='${picture}' class='Quoteinnerimg'>";
   echo "<p id='textfix'>${quote}</p>";
   echo "<p id='namefix'>${name}</p>";
+  echo "<p id='CatLand'>,ID:${id}</p>";
   echo "<p id='CatLand'>${category}, {$lang}</p>";
   echo "</div></div>";
-  $i++;
-
-  }
 }
+}
+
 
 
   ?>

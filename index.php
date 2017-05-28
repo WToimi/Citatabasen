@@ -14,6 +14,7 @@
 
 <!-- Här skriver man htmlkoden som är individuell för varje sida. -->
 <h2>Welcome to Citatabasen!</h2>
+<img src="img/NTIgymnasiet.png" style="margin-left:15px;height:100px;width:auto;float:right;">
 <p id="welcome">
 The Quote database! Whether you're looking for a particular quote of just something random or funny, this is the right place for you!
 Citatabasen is also an API, check out the instructions page if you want to learn more!
@@ -23,6 +24,8 @@ If you're looking to submit your own quote you'll first have to register, then y
 We'll need to make sure you're not just a troll first so the quote might not appear on the site instantly. But just stay put and
  it'll probably appear soon.
  <br/>
+ <br/>
+ Citatabasen is a school project made my Wilhelm Toimi and Anton Holgersson! It's easy to use! For instructions, just click the instructions tab!
 <h3>Quote of the day!</h3>
 
 
@@ -30,7 +33,7 @@ We'll need to make sure you're not just a troll first so the quote might not app
 <?php require('config/db.php');
 $mysqli = new mysqli($servername, $username, $password, $dbname);
 
-$qry = mysqli_query($mysqli, "SELECT Id,Name,Quote,Picture,Category,Lang FROM quotes WHERE Id = 11");
+$qry = mysqli_query($mysqli, "SELECT Id,Name,Quote,Picture,Category,Lang FROM quotes WHERE Id = 16");
 
 while($rows = mysqli_fetch_array($qry)){
 $id = $rows['Id'];

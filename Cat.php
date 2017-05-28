@@ -16,11 +16,12 @@
 <script>$("#searchboxload").load("Searchbox.html");</script>
 
 
+
 <div>
 <!-- Left side -->
 <div id="left" style="margin:0 0 0 6%;">
   <!-- Category box (link)-->
-  <a href="#">
+  <a href="Cat.php?Swedish">
     <!-- Swedish -->
   <div class="catcont" style="background-image:
   url(http://i.imgur.com/2TP7xpQ.png); width:100%;background-size:100% 100%;">
@@ -171,94 +172,59 @@ Youtube
 
 <!---->
 <div style="margin-left:8%;margin-top:1%;">
-<div id="left" style="width:49%;">
-      <!-- -->
-      <div class="Quote">
-        <div class="Quoteinner">
-        <img src="img/orwell.jpg" class="Quoteinnerimg">
 
-        <p>Freedom is the right to tell people what they do not want to hear.</p>
-        <p id="namefix">-George Orwell</p>
-        </div>
-      </div>
-      <!-- -->
-      <!-- -->
-      <div class="Quote">
-        <div class="Quoteinner">
-        <img src="img/orwell.jpg" class="Quoteinnerimg">
+<div style="width:90%;margin:auto;">
+  <?php require('config/db.php');
+  $mysqli = new mysqli($servername, $username, $password, $dbname);
 
-        <p>Freedom is the right to tell people what they do not want to hear.</p>
-        <p id="namefix">-George Orwell</p>
-        </div>
-      </div>
-      <!-- -->
-      <!-- -->
-      <div class="Quote">
-        <div class="Quoteinner">
-        <img src="img/orwell.jpg" class="Quoteinnerimg">
 
-        <p>Freedom is the right to tell people what they do not want to hear.</p>
-        <p id="namefix">-George Orwell</p>
-        </div>
-      </div>
-      <!-- -->
-      <!-- -->
-      <div class="Quote">
-        <div class="Quoteinner">
-        <img src="img/orwell.jpg" class="Quoteinnerimg">
+$SetCat = null;
+  function SetSwedish(){
+    $SetCat = 'Swedish';
+  }
+  if(isset($_GET['Swedish'])){
+    SetSwedish();
+  }
 
-        <p>Freedom is the right to tell people what they do not want to hear.</p>
-        <p id="namefix">-George Orwell</p>
-        </div>
-      </div>
-      <!-- -->
-</div>
+if ($SetCat === 'Swedish') {
+  $qry = mysqli_query($mysqli, "SELECT Id,Name,Quote,Picture,Category,Lang FROM quotes WHERE Lang = 'Swedish'");
 
-      <div id="right" style="width:49%">
-            <!-- -->
-            <div class="Quote">
-              <div class="Quoteinner">
-              <img src="img/orwell.jpg" class="Quoteinnerimg">
+  while($rows = mysqli_fetch_array($qry)){
 
-              <p>Freedom is the right to tell people what they do not want to hear.</p>
-              <p id="namefix">-George Orwell</p>
-              </div>
-            </div>
-            <!---->
-            <div class="Quote">
-              <div class="Quoteinner">
-              <img src="img/orwell.jpg" class="Quoteinnerimg">
+  $id = $rows['Id'];
+  $quote = $rows['Quote'];
+  $name = $rows['Name'];
+  $picture = $rows['Picture'];
+  $category = $rows['Category'];
+  $lang = $rows['Lang'];
 
-              <p>Freedom is the right to tell people what they do not want to hear.</p>
-              <p id="namefix">-George Orwell</p>
-              </div>
-            </div>
-            <!---->
-            <!-- -->
-            <div class="Quote">
-              <div class="Quoteinner">
-              <img src="img/orwell.jpg" class="Quoteinnerimg">
 
-              <p>Freedom is the right to tell people what they do not want to hear.</p>
-              <p id="namefix">-George Orwell</p>
-              </div>
-            </div>
-            <!-- -->
-            <!-- -->
-            <div class="Quote">
-              <div class="Quoteinner">
-              <img src="img/orwell.jpg" class="Quoteinnerimg">
 
-              <p>Freedom is the right to tell people what they do not want to hear.</p>
-              <p id="namefix">-George Orwell</p>
-              </div>
-            </div>
-            <!-- -->
+  echo "<div class='Quote'>";
+  echo "<div class='Quoteinner'>";
+  echo "<img src='${picture}' class='Quoteinnerimg'>";
+  echo "<p id='textfix'>${quote}</p>";
+  echo "<p id='namefix'>${name}</p>";
+  echo "<p id='CatLand'>,ID:${id}</p>";
+  echo "<p id='CatLand'>${category}, {$lang}</p>";
+  echo "</div></div>";
+
+
+
+  }
+}
+
+
+
+
+  ?>
 
 </div>
-            <!-- -->
+
+
+
 </div>
-<!---->
+
 
   </body>
 </html>
